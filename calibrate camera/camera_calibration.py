@@ -2,42 +2,49 @@
 This code assumes that images used for calibration are of the same arUco marker board provided with code
 
 """
-
+#este es el que estoy editando
 import cv2
 from cv2 import aruco
 import yaml
 import numpy as np
 from pathlib import Path
 from tqdm import tqdm
+import os
+from yaml.loader import SafeLoader
+
+print("version openCV", cv2.__version__)
+print("path openCV", cv2.__path__)
+
 
 # root directory of repo for relative path specification.
 root = Path(__file__).parent.absolute()
 
+
 # Set this flsg True for calibrating camera and False for validating results real time
-calibrate_camera = True
+calibrate_camera = False
 
 # Set path to the images
-calib_imgs_path = root.joinpath("aruco_data")
+calib_imgs_path = root.joinpath("aruco_data_new")
 
 # For validating results, show aruco board to camera.
-aruco_dict = aruco.getPredefinedDictionary( aruco.DICT_6X6_1000 )
+aruco_dict = aruco.getPredefinedDictionary( aruco.DICT_5X5_250 )
 
 #Provide length of the marker's side
-markerLength = 3.75  # Here, measurement unit is centimetre.
+markerLength = 15  # Here, measurement unit is centimetre. 
 
 # Provide separation between markers
-markerSeparation = 0.5   # Here, measurement unit is centimetre.
+markerSeparation = 70   # Here, measurement unit is centimetre. 
 
 # create arUco board
-board = aruco.GridBoard((4, 5), markerLength, markerSeparation, aruco_dict)
+board = aruco.GridBoard_create(2, 2, markerLength, markerSeparation, aruco_dict)
 
 '''uncomment following block to draw and show the board'''
-#img = board.draw((864,1080))
+#img = board.draw((432,540))
 #cv2.imshow("aruco", img)
+#cv2.waitKey(0)
 
-arucoParams = aruco.DetectorParameters()
-arucoDetector = aruco.ArucoDetector(aruco_dict, arucoParams)
-aux = 1
+arucoParams = aruco.DetectorParameters_create()
+
 if calibrate_camera == True:
     img_list = []
     calib_fnms = calib_imgs_path.glob('*.jpg')
@@ -52,10 +59,8 @@ if calibrate_camera == True:
     counter, corners_list, id_list = [], [], []
     first = True
     for im in tqdm(img_list):
-        print("numero",aux)
-        aux = aux+1
         img_gray = cv2.cvtColor(im,cv2.COLOR_RGB2GRAY)
-        corners, ids, rejectedImgPoints = arucoDetector.detectMarkers(img_gray)
+        corners, ids, rejectedImgPoints = aruco.detectMarkers(img_gray, aruco_dict, parameters=arucoParams)
         if first == True:
             corners_list = corners
             id_list = ids
@@ -68,20 +73,20 @@ if calibrate_camera == True:
 
     counter = np.array(counter)
     print ("Calibrating camera .... Please wait...")
-    cameraMatrix = np.zeros((3,3), float)
-    #ret, mtx, dist, rvecs, tvecs = aruco.calibrateCameraAruco(corners_list, id_list, counter, board, img_gray.shape, cameraMatrix, None )
-    rvecs, tvecs = aruco.calibrateCameraAruco(corners_list, id_list, counter, board, img_gray.shape, cameraMatrix, None )
+    #mat = np.zeros((3,3), float)
+    ret, mtx, dist, rvecs, tvecs = aruco.calibrateCameraAruco(corners_list, id_list, counter, board, img_gray.shape, None, None )
+
     print("Camera matrix is \n", mtx, "\n And is stored in calibration.yaml file along with distortion coefficients : \n", dist)
     data = {'camera_matrix': np.asarray(mtx).tolist(), 'dist_coeff': np.asarray(dist).tolist()}
-    with open("calibration.yaml", "w") as f:
+    with open(os.path.dirname(__file__) + '/calibration.yaml', "w") as f:
         yaml.dump(data, f)
 
 else:
     camera = cv2.VideoCapture(0)
     ret, img = camera.read()
 
-    with open('calibration.yaml') as f:
-        loadeddict = yaml.load(f)
+    with open(os.path.dirname(__file__) + '/calibration.yaml',"r") as f:
+        loadeddict = yaml.load(f, Loader=SafeLoader)
     mtx = loadeddict.get('camera_matrix')
     dist = loadeddict.get('dist_coeff')
     mtx = np.array(mtx)
@@ -105,12 +110,12 @@ else:
             print ("pass")
         else:
 
-            ret, rvec, tvec = aruco.estimatePoseBoard(corners, ids, board, newcameramtx, dist) # For a board
+            ret, rvec, tvec = aruco.estimatePoseBoard(corners, ids, board, newcameramtx, dist, None, None) # For a board
             print ("Rotation ", rvec, "Translation", tvec)
             if ret != 0:
                 img_aruco = aruco.drawDetectedMarkers(img, corners, ids, (0,255,0))
-                img_aruco = aruco.drawAxis(img_aruco, newcameramtx, dist, rvec, tvec, 10)    # axis length 100 can be changed according to your requirement
-
+                img_aruco = cv2.drawFrameAxes(img_aruco, newcameramtx, dist, rvec, tvec, 10)    # axis length 100 can be changed according to your requirement
+                #OX is drawn in red, OY in green and OZ in blue. 
             if cv2.waitKey(0) & 0xFF == ord('q'):
                 break;
         cv2.imshow("World co-ordinate frame axes", img_aruco)
