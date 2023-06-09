@@ -13,7 +13,10 @@ def runImageFileDetection(file_path):
 
     #image_name = file_path + 'persons.jpg'
     # test a single image
-    pose_results, _ = inference_bottom_up_pose_model(pose_model, file_path)
+    pose_results, other = inference_bottom_up_pose_model(pose_model, file_path)
+    
+    print('pose results',pose_results)
+    print('other',other)
 
     # show the results
     vis_pose_result(pose_model, file_path, pose_results, out_file= os.path.dirname(__file__)+'/mmpose_photos/result2.jpg')    #cambiar esto porque lo guarda en home

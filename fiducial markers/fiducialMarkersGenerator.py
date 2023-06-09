@@ -25,7 +25,7 @@ cv.imwrite(os.path.dirname(__file__) + "/markers/markerPredefined"+str(id)+".png
 ''' Automatic dictionary is, as far as I'm concerned, only available in the new version of 
     OpenCV, 4.7.0.
     I'm currently using version 4.6.0 because the newest version is not stable with aruco.
-    Because if that, this section is ignored
+    Because of that, this section is ignored
 
 #Automatic dictionary
 numberOfMarkers = 6

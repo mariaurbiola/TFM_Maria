@@ -68,8 +68,7 @@ print("corners",corners)
 for i in range (len(tvecs)):
     #print(i)
     imgOutMarkers = cv.drawFrameAxes(imgOutMarkers, cameraMatrix, distCoeffs, rvecs[i], tvecs[i], 50)
-cv.imshow("Output image Axis", imgOutMarkers)
-cv.waitKey(0)
+
 
 rvec = rvecs
 tvec = tvecs[0][0]
@@ -91,8 +90,8 @@ projectionMatrix = cameraMatrix.dot(RTmatrix)
 projectionMatrix = cameraMatrix @ RTmatrix
 print(projectionMatrix)
 projectionMatrixExt = np.row_stack((projectionMatrix,arrayAux))
-distancia = 0
-pixelPointMatrixExt = (np.array([corners[0][0][0][0],corners[0][0][0][1],distancia,1])).reshape(-1,1)
+
+pixelPointMatrixExt = (np.array([corners[0][0][0][0],corners[0][0][0][1],1,1])).reshape(-1,1)
 
 worldPointMatrixDirect = np.linalg.inv(projectionMatrixExt) @ pixelPointMatrixExt
 print("point direct",worldPointMatrixDirect)
@@ -101,7 +100,9 @@ print("point direct",worldPointMatrixDirect)
 
 pixelPointMatrix = (np.array([corners[0][0][0][0],corners[0][0][0][1],1])).reshape(-1,1)
 
-pixelPointTest = (np.array([514,259,1])).reshape(-1,1)
+pixelPointTest = (np.array([400,400,1])).reshape(-1,1)
+cv.circle(imgOutMarkers,(208,366), 5, (0,0,255), -1)
+cv.circle(imgOutMarkers,(400,400), 5, (0,0,255), -1)
 print("pixel point", pixelPointTest)
 matrixRTAuxInv = np.linalg.inv(matrixRTAux)
 #print("inversa", matrixRTAuxInv)
@@ -126,3 +127,6 @@ print("World point new",worldPointMatrix2)
     
 #pruebo otra cosa
 #t = cambia algo para el git
+
+cv.imshow("Output image Axis", imgOutMarkers)
+cv.waitKey(0)
