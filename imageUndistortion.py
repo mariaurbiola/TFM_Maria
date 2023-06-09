@@ -4,6 +4,7 @@ import os
 import yaml
 from yaml.loader import SafeLoader
 import numpy as np
+from pixelToWorld import pixelToWorld
 
 #ger aurco dictionary
 dictionary = aruco.getPredefinedDictionary(cv.aruco.DICT_5X5_250); #predefined dictionary
@@ -101,8 +102,8 @@ print("point direct",worldPointMatrixDirect)
 pixelPointMatrix = (np.array([corners[0][0][0][0],corners[0][0][0][1],1])).reshape(-1,1)
 
 pixelPointTest = (np.array([400,400,1])).reshape(-1,1)
-cv.circle(imgOutMarkers,(208,366), 5, (0,0,255), -1)
-cv.circle(imgOutMarkers,(400,400), 5, (0,0,255), -1)
+cv.circle(imgOutMarkers,(208,366), 5, (0,0,255), -1)    #cx,cy en rojo
+cv.circle(imgOutMarkers,(400,400), 5, (255,0,255), -1)  #pixel a encontrar, en rosa
 print("pixel point", pixelPointTest)
 matrixRTAuxInv = np.linalg.inv(matrixRTAux)
 #print("inversa", matrixRTAuxInv)
@@ -127,6 +128,7 @@ print("World point new",worldPointMatrix2)
     
 #pruebo otra cosa
 #t = cambia algo para el git
-
+result = pixelToWorld([400,400])
+print("result form function: ",result)
 cv.imshow("Output image Axis", imgOutMarkers)
 cv.waitKey(0)

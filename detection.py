@@ -58,9 +58,9 @@ def detection(detection_mode, media_file):
         print('nada')
         
         
-#detection_mode = 'imageFile'
-#media_file = 'test2.jpg'
+detection_mode = 'imageFile'
+media_file = 'test1.jpg'
 #detection_mode = 'videoFile'
-media_file = 'demo4.mp4'
-detection_mode = 'webcam'
+#media_file = 'demo.mp4'
+#detection_mode = 'webcam'
 detection(detection_mode, media_file)
