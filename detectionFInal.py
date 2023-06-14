@@ -8,8 +8,6 @@ print(cv2.__version__)
 print(cv2.__path__)
 
 
-
-
 parser = ArgumentParser()
 parser.add_argument(
     '--detection_mode', 
@@ -29,12 +27,12 @@ if args.detection_mode == 'webcam':
     runWebcamDetection()
 elif args.detection_mode == 'imageFile':
     print('imageFile')
-    path_to_media_folder = os.path.dirname(__file__) + '/mmpose_photos/'
+    path_to_media_folder = os.path.dirname(__file__) + '/photos/'
     media_name = path_to_media_folder + args.media_file #change this with the name of the file
     runImageFileDetection(media_name)
 elif args.detection_mode == 'videoFile':
     print('videoFile')
-    path_to_media_folder = os.path.dirname(__file__) + '/mmpose_videos/'
+    path_to_media_folder = os.path.dirname(__file__) + '/videos/'
     media_name = path_to_media_folder + args.media_file #change this with the name of the file
     runVideoFileDetection(media_name)
 else:

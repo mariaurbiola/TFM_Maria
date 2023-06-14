@@ -16,20 +16,17 @@ def pixelToWorld(pixelPoint):
     distCoeffs = np.array(distCoefs)
     #print("Intinsic matrix",cameraMatrix)
 
-    cameraMatrixInv = np.linalg.inv(cameraMatrix)
+    cameraMatrixInv = np.linalg.inv(cameraMatrix)   #inverse camera matrix
 
-
-
-    pixelPointMatrix = (np.array([pixelPoint[0],pixelPoint[1],1])).reshape(-1,1)
+    pixelPointMatrix = (np.array([pixelPoint[0],pixelPoint[1],1])).reshape(-1,1)    #transpose pixelPoint matrix
     #print("pixel point", pixelPointMatrix)
 
-
-    imagePlanePointMatrix = cameraMatrixInv @ pixelPointMatrix
+    imagePlanePointMatrix = cameraMatrixInv @ pixelPointMatrix  #convert the pixel coordinates to camera coordinates through the inverse camera intrinsic matrix
 
     #print("image plane point ", imagePlanePointMatrix)
 
     distancia = 3000    #la distancia al punto, que idealmente hubiera sido con la camara suya
-    worldPointMatrix = imagePlanePointMatrix * distancia
+    worldPointMatrix = imagePlanePointMatrix * distancia    #convert the camera coordinates to world coordinates
     #print("World point new",worldPointMatrix)
     
     return(worldPointMatrix)
