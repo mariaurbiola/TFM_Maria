@@ -7,6 +7,10 @@ It corresponds to the images of the actual test, the one that I'm currently work
 # Folder aruco_data_new_copy
 A copy of the previous folder, there for security resons.
 
+# Folder calibrationImages
+Where the images aquired with the data_generator are stored
+
+
 
 # File camera_calibration
 Code and resources for camera calibration using arUco markers and opencv 

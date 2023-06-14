@@ -1,8 +1,3 @@
-"""
-This code assumes that images used for calibration are of the same arUco marker board provided with code
-
-"""
-#este es el que estoy editando
 import cv2
 from cv2 import aruco
 import yaml
@@ -24,7 +19,7 @@ root = Path(__file__).parent.absolute()
 calibrate_camera = True
 
 # Set path to the images
-calib_imgs_path = root.joinpath("aruco_data_new")
+calib_imgs_path = root.joinpath("calibrationImages")
 
 # For validating results, show aruco board to camera.
 aruco_dict = aruco.getPredefinedDictionary( aruco.DICT_5X5_250 )
@@ -48,13 +43,13 @@ arucoParams = aruco.DetectorParameters_create()
 if calibrate_camera == True:
     img_list = []
     calib_fnms = calib_imgs_path.glob('*.jpg')
-    print('Using ...', end='')
+    #print('Using ...', end='')
     for idx, fn in enumerate(calib_fnms):
-        print(idx, '', end='')
+        #print(idx, '', end='')
         img = cv2.imread( str(root.joinpath(fn) ))
         img_list.append( img )
         h, w, c = img.shape
-    print('Calibration images')
+    #print('Calibration images')
 
     counter, corners_list, id_list = [], [], []
     first = True
@@ -69,14 +64,16 @@ if calibrate_camera == True:
             corners_list = np.vstack((corners_list, corners))
             id_list = np.vstack((id_list,ids))
         counter.append(len(ids))
-    print('Found {} unique markers'.format(np.unique(ids)))
+    #print('Found {} unique markers'.format(np.unique(ids)))
 
     counter = np.array(counter)
-    print ("Calibrating camera .... Please wait...")
+    #print ("Calibrating camera .... Please wait...")
     #mat = np.zeros((3,3), float)
     ret, mtx, dist, rvecs, tvecs = aruco.calibrateCameraAruco(corners_list, id_list, counter, board, img_gray.shape, None, None )
-
-    print("Camera matrix is \n", mtx, "\n And is stored in calibration.yaml file along with distortion coefficients : \n", dist)
+    #print("ret",ret)
+    #print("rvecs",rvecs)
+    #print("tvecs",tvecs)
+    #print("Camera matrix is \n", mtx, "\n And is stored in calibration.yaml file along with distortion coefficients : \n", dist)
     data = {'camera_matrix': np.asarray(mtx).tolist(), 'dist_coeff': np.asarray(dist).tolist()}
     with open(os.path.dirname(__file__) + '/calibration.yaml', "w") as f:
         yaml.dump(data, f)
