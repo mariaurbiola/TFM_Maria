@@ -16,7 +16,7 @@ root = Path(__file__).parent.absolute()
 
 
 # Set this flsg True for calibrating camera and False for validating results real time
-calibrate_camera = True
+calibrate_camera = False
 
 # Set path to the images
 calib_imgs_path = root.joinpath("calibrationImages")
@@ -68,12 +68,11 @@ if calibrate_camera == True:
 
     counter = np.array(counter)
     #print ("Calibrating camera .... Please wait...")
-    #mat = np.zeros((3,3), float)
     ret, mtx, dist, rvecs, tvecs = aruco.calibrateCameraAruco(corners_list, id_list, counter, board, img_gray.shape, None, None )
     #print("ret",ret)
     #print("rvecs",rvecs)
     #print("tvecs",tvecs)
-    #print("Camera matrix is \n", mtx, "\n And is stored in calibration.yaml file along with distortion coefficients : \n", dist)
+    print("Camera matrix is \n", mtx, "\n And is stored in calibration.yaml file along with distortion coefficients : \n", dist)
     data = {'camera_matrix': np.asarray(mtx).tolist(), 'dist_coeff': np.asarray(dist).tolist()}
     with open(os.path.dirname(__file__) + '/calibration.yaml', "w") as f:
         yaml.dump(data, f)

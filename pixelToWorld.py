@@ -5,7 +5,7 @@ import yaml
 from yaml.loader import SafeLoader
 import numpy as np
 
-def pixelToWorld(pixelPoint):
+def pixelToWorld(pixelPoint,distance):
 
     #get camer matrix and distortion coefficients from file (previously calibrated)
     with open(os.path.dirname(__file__) + '/calibrate camera/calibration.yaml',"r") as f:
@@ -25,8 +25,7 @@ def pixelToWorld(pixelPoint):
 
     #print("image plane point ", imagePlanePointMatrix)
 
-    distancia = 3000    #la distancia al punto, que idealmente hubiera sido con la camara suya
-    worldPointMatrix = imagePlanePointMatrix * distancia    #convert the camera coordinates to world coordinates
+    worldPointMatrix = imagePlanePointMatrix * distance   #convert the camera coordinates to world coordinates
     #print("World point new",worldPointMatrix)
     
     return(worldPointMatrix)
