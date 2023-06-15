@@ -4,8 +4,6 @@ from videoFileDetection import runVideoFileDetection
 import os
 import cv2
 from argparse import ArgumentParser
-print(cv2.__version__)
-print(cv2.__path__)
 
 
 
@@ -60,7 +58,7 @@ def detection(detection_mode, media_file):
         
 #detection_mode = 'imageFile'
 #media_file = 'testMarker2.jpg'
-detection_mode = 'videoFile'
+#detection_mode = 'videoFile'
 media_file = 'testVideo4.mp4'
-#detection_mode = 'webcam'
+detection_mode = 'webcam'
 detection(detection_mode, media_file)
