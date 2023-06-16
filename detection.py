@@ -44,21 +44,23 @@ def detection(detection_mode, media_file):
         runWebcamDetection()
     elif detection_mode == 'imageFile':
         print('imageFile')
-        path_to_media_folder = os.path.dirname(__file__) + '/photos/'
-        media_name = path_to_media_folder + media_file #change this with the name of the file
+        #path_to_media_folder = os.path.dirname(__file__) #+ '/photos/'
+        #media_name = path_to_media_folder + media_file #change this with the name of the file
+        media_name = os.path.dirname(__file__)+ media_file
         runImageFileDetection(media_name)
     elif detection_mode == 'videoFile':
         print('videoFile')
-        path_to_media_folder = os.path.dirname(__file__) + '/videos/'
-        media_name = path_to_media_folder + media_file #change this with the name of the file
+        #path_to_media_folder = os.path.dirname(__file__) + '/videos/'
+        #media_name = path_to_media_folder + media_file #change this with the name of the file
+        media_name = os.path.dirname(__file__)+ media_file
         runVideoFileDetection(media_name)
     else:
         print('nada')
         
         
-#detection_mode = 'imageFile'
-#media_file = 'testMarker2.jpg'
+detection_mode = 'imageFile'
+media_file = '/photos/testMarker1.jpg'
 #detection_mode = 'videoFile'
-media_file = 'testVideo4.mp4'
-detection_mode = 'webcam'
+#media_file = '/videos/testVideo4.mp4'
+#detection_mode = 'webcam'
 detection(detection_mode, media_file)
