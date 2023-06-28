@@ -47,6 +47,7 @@ def detection(detection_mode, media_file):
         #path_to_media_folder = os.path.dirname(__file__) #+ '/photos/'
         #media_name = path_to_media_folder + media_file #change this with the name of the file
         media_name = os.path.dirname(__file__)+ media_file
+        print(media_name)
         runImageFileDetection(media_name)
     elif detection_mode == 'videoFile':
         print('videoFile')
@@ -58,9 +59,9 @@ def detection(detection_mode, media_file):
         print('nada')
         
         
-detection_mode = 'imageFile'
-media_file = '/photos/testMarker1.jpg'
-#detection_mode = 'videoFile'
-#media_file = '/videos/testVideo4.mp4'
+#detection_mode = 'imageFile'
+#media_file = '/photos/persons1.jpg'
+detection_mode = 'videoFile'
+media_file = '/videos/video3.mp4'
 #detection_mode = 'webcam'
 detection(detection_mode, media_file)

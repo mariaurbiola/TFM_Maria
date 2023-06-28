@@ -1,0 +1,306 @@
+Person id: 0
+Point Number: 1
+Pixel coordinates:
+- 205.89401245117188
+- 8.273193359375
+World coordinates:
+- - -41.72963720843547
+- - -35.0025823754747
+- - 134.9694152806083
+Person id: 0
+Point Number: 2
+Pixel coordinates:
+- 224.61376953125
+- 8.273193359375
+World coordinates:
+- - -38.93744575676047
+- - -35.0025823754747
+- - 134.9694152806083
+Person id: 0
+Point Number: 3
+Pixel coordinates:
+- 196.53414916992188
+- 3.59326171875
+World coordinates:
+- - -43.12573065831073
+- - -35.65916974466441
+- - 134.9694152806083
+Person id: 0
+Point Number: 4
+Pixel coordinates:
+- 290.1328125
+- -5.7666015625
+World coordinates:
+- - -29.16479160763368
+- - -36.972344483043834
+- - 134.9694152806083
+Person id: 0
+Point Number: 5
+Pixel coordinates:
+- 187.17425537109375
+- -10.446533203125
+World coordinates:
+- - -44.52182866011048
+- - -37.62893185223354
+- - 134.9694152806083
+Person id: 0
+Point Number: 6
+Pixel coordinates:
+- 332.25225830078125
+- 87.83209228515625
+World coordinates:
+- - -22.882361979346054
+- - -23.84058853610902
+- - 134.9694152806083
+Person id: 0
+Point Number: 7
+Pixel coordinates:
+- 145.05487060546875
+- 83.15216064453125
+World coordinates:
+- - -50.80424918454912
+- - -24.497175905298732
+- - 134.9694152806083
+Person id: 0
+Point Number: 8
+Pixel coordinates:
+- 365.01177978515625
+- 251.6297607421875
+World coordinates:
+- - -17.996034904782658
+- - -0.8600220513285619
+- - 134.9694152806083
+Person id: 0
+Point Number: 9
+Pixel coordinates:
+- 112.29534912109375
+- 242.2698974609375
+World coordinates:
+- - -55.69057625911251
+- - -2.173196789707981
+- - 134.9694152806083
+Person id: 0
+Point Number: 10
+Pixel coordinates:
+- 383.73150634765625
+- 401.3876953125
+World coordinates:
+- - -15.20384800503215
+- - 20.15079088902338
+- - 134.9694152806083
+Person id: 0
+Point Number: 11
+Pixel coordinates:
+- 65.49600219726562
+- 387.347900390625
+World coordinates:
+- - -62.671048060413284
+- - 18.18102878145425
+- - 134.9694152806083
+Person id: 0
+Point Number: 12
+Pixel coordinates:
+- 285.452880859375
+- 387.347900390625
+World coordinates:
+- - -29.862838332571314
+- - 18.18102878145425
+- - 134.9694152806083
+Person id: 0
+Point Number: 13
+Pixel coordinates:
+- 154.41473388671875
+- 387.347900390625
+World coordinates:
+- - -49.40815573467387
+- - 18.18102878145425
+- - 134.9694152806083
+Person id: 0
+Point Number: 14
+Pixel coordinates:
+- 276.093017578125
+- 462.226806640625
+World coordinates:
+- - -31.258931782446563
+- - 28.686426688489615
+- - 134.9694152806083
+Person id: 0
+Point Number: 15
+Pixel coordinates:
+- 51.4561767578125
+- 275.02947998046875
+World coordinates:
+- - -64.76519278715065
+- - 2.4229233577606
+- - 134.9694152806083
+Person id: 0
+Point Number: 16
+Pixel coordinates:
+- 336.93218994140625
+- 443.507080078125
+World coordinates:
+- - -22.18431525440842
+- - 26.060077211730768
+- - 134.9694152806083
+Person id: 0
+Point Number: 17
+Pixel coordinates:
+- 56.1361083984375
+- 443.507080078125
+World coordinates:
+- - -64.06714606221303
+- - 26.060077211730768
+- - 134.9694152806083
+Person id: 1
+Point Number: 1
+Pixel coordinates:
+- 514.07470703125
+- 231.588623046875
+World coordinates:
+- - 4.237812972502871
+- - -3.6717635222310343
+- - 134.9694152806083
+Person id: 1
+Point Number: 2
+Pixel coordinates:
+- 514.07470703125
+- 226.406494140625
+World coordinates:
+- - 4.237812972502871
+- - -4.398808412335932
+- - 134.9694152806083
+Person id: 1
+Point Number: 3
+Pixel coordinates:
+- 514.07470703125
+- 226.406494140625
+World coordinates:
+- - 4.237812972502871
+- - -4.398808412335932
+- - 134.9694152806083
+Person id: 1
+Point Number: 4
+Pixel coordinates:
+- 477.7998046875
+- 226.406494140625
+World coordinates:
+- - -1.1728593883235925
+- - -4.398808412335932
+- - 134.9694152806083
+Person id: 1
+Point Number: 5
+Pixel coordinates:
+- 508.892578125
+- 228.99755859375
+World coordinates:
+- - 3.464859778099097
+- - -4.035285967283482
+- - 134.9694152806083
+Person id: 1
+Point Number: 6
+Pixel coordinates:
+- 457.0712890625
+- 252.317138671875
+World coordinates:
+- - -4.264672165938719
+- - -0.7635839618114404
+- - 134.9694152806083
+Person id: 1
+Point Number: 7
+Pixel coordinates:
+- 511.483642578125
+- 260.09033203125
+World coordinates:
+- - 3.851336375300984
+- - 0.3269833733459079
+- - 134.9694152806083
+Person id: 1
+Point Number: 8
+Pixel coordinates:
+- 433.751708984375
+- 288.592041015625
+World coordinates:
+- - -7.742961540755732
+- - 4.325730268922847
+- - 134.9694152806083
+Person id: 1
+Point Number: 9
+Pixel coordinates:
+- 568.487060546875
+- 293.774169921875
+World coordinates:
+- - 12.353821513742574
+- - 5.052775159027741
+- - 134.9694152806083
+Person id: 1
+Point Number: 10
+Pixel coordinates:
+- 431.16064453125
+- 340.413330078125
+World coordinates:
+- - -8.129438137957626
+- - 11.596179169971823
+- - 134.9694152806083
+Person id: 1
+Point Number: 11
+Pixel coordinates:
+- 524.43896484375
+- 293.774169921875
+World coordinates:
+- - 5.783719361310434
+- - 5.052775159027741
+- - 134.9694152806083
+Person id: 1
+Point Number: 12
+Pixel coordinates:
+- 444.115966796875
+- 353.36865234375
+World coordinates:
+- - -6.1970551519481685
+- - 13.413791395234064
+- - 134.9694152806083
+Person id: 1
+Point Number: 13
+Pixel coordinates:
+- 482.98193359375
+- 358.55078125
+World coordinates:
+- - -0.3999061939198184
+- - 14.140836285338965
+- - 134.9694152806083
+Person id: 1
+Point Number: 14
+Pixel coordinates:
+- 524.43896484375
+- 355.959716796875
+World coordinates:
+- - 5.783719361310434
+- - 13.777313840286519
+- - 134.9694152806083
+Person id: 1
+Point Number: 15
+Pixel coordinates:
+- 542.576416015625
+- 376.688232421875
+World coordinates:
+- - 8.489055541723673
+- - 16.68549340070611
+- - 134.9694152806083
+Person id: 1
+Point Number: 16
+Pixel coordinates:
+- 511.483642578125
+- 428.509521484375
+World coordinates:
+- - 3.851336375300984
+- - 23.955942301755087
+- - 134.9694152806083
+Person id: 1
+Point Number: 17
+Pixel coordinates:
+- 503.71044921875
+- 428.509521484375
+World coordinates:
+- - 2.6919065836953076
+- - 23.955942301755087
+- - 134.9694152806083

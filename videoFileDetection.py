@@ -189,8 +189,14 @@ def runVideoFileDetection(file_path):
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         videoWriter = cv2.VideoWriter(
             os.path.join(args.out_video_root,
-                         f'vis_{os.path.basename(args.video_path)}'), fourcc,
+                         f'result_{os.path.basename(args.video_path)}'), fourcc,
             fps, size)
+        #print("videoWriter", videoWriter['filename]'])
+        videoWriterEdited = cv2.VideoWriter(
+            os.path.join(args.out_video_root,
+                         f'resultWithPoints_{os.path.basename(args.video_path)}'), fourcc,
+            fps, size)
+        print("videoWriterEdited",videoWriterEdited)
 
     # frame index offsets for inference, used in multi-frame inference setting
     if args.use_multi_frames:
@@ -275,6 +281,7 @@ def runVideoFileDetection(file_path):
             kpt_score_thr=args.kpt_thr,
             show=False)
         
+        frameEdited = vis_frame.copy() #a new frame to do the changes here, but keep the original
         #these are the pixel points
         #print(pose_results)
         #code to find the distance. It is assumed that there is only 1 marker in the image
@@ -284,16 +291,16 @@ def runVideoFileDetection(file_path):
         dictionary = aruco.getPredefinedDictionary(cv2.aruco.DICT_5X5_250); #predefined dictionary
         arucoParams = aruco.DetectorParameters_create()
         objPoints = (np.array([[0, 0, 1], [15, 0, 1], [15, 15, 1], [0, 15, 1]], np.int32)).astype('float32')
-        corners, ids, rejectedImgPoints = aruco.detectMarkers(vis_frame, dictionary, parameters=arucoParams)
-        print("corners", corners)
+        corners, ids, rejectedImgPoints = aruco.detectMarkers(frameEdited, dictionary, parameters=arucoParams)
+        #print("corners", corners)
         if len(corners) == 0:
             distanceActualPoint = distance
         else:
         
-            print("corners[0][0][0]",corners[0][0][0])
-            print("corners[0][0][1]",corners[0][0][1])
-            print("corners[0][0][2]",corners[0][0][2])
-            print("corners[0][0][3]",corners[0][0][3])
+            #print("corners[0][0][0]",corners[0][0][0])
+            #print("corners[0][0][1]",corners[0][0][1])
+            #print("corners[0][0][2]",corners[0][0][2])
+            #print("corners[0][0][3]",corners[0][0][3])
             
             imgPoints = (np.array([corners[0][0][0],corners[0][0][1],corners[0][0][2],corners[0][0][3]], np.int32)).astype('float32')
             
@@ -308,9 +315,30 @@ def runVideoFileDetection(file_path):
             #print("retval",retval)
             distanceActualPoint = tvec[2][0]
             distance = distanceActualPoint  #update the distance for next frame
-        print("distancia ", distanceActualPoint)
-        pixels = pose_results[0]['keypoints']
+        #print("distancia ", distanceActualPoint)
+        
         with open(os.path.dirname(__file__) + '/videos/'+Path(file_path).stem+'Data/Frame'+str(iterationNumber), "w") as f:
+            for j in range (len(pose_results)):
+                pixels = pose_results[j]['keypoints']
+                for i in range (len(pixels)):
+                    #convert pixel coord to world coord
+                    #print("iteracion n",i+1)
+                    pixeli = [pixels[i][0],pixels[i][1]]
+                    #print("pose result pixel: ", pixeli)
+                    worldPoint = pixelToWorld(pixeli,distanceActualPoint)
+                    #print("worldPoint: ",worldPoint)
+                    data = {'Person id': j,'Point Number': i+1,'Pixel coordinates': np.asarray(pixeli).tolist(), 'World coordinates': np.asarray(worldPoint).tolist()}
+
+                    yaml.dump(data, f,sort_keys=False)
+                    
+                    #add the real world coordinates to the image
+                    text = str((np.array(worldPoint)).astype(int))
+                    frameEdited = cv2.putText(frameEdited, text, (np.array(pixeli)).astype(int), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 153, 255))
+                    frameEdited = cv2.circle(frameEdited,(np.array(pixeli)).astype(int), 2, (255, 153, 255), -1)
+            
+    
+            
+            '''
             for i in range (len(pixels)):
                 #convert pixel coord to world coord
                 #print("iteracion n",i+1)
@@ -324,8 +352,9 @@ def runVideoFileDetection(file_path):
                 
                 #add the real world coordinates to the image
                 text = str((np.array(worldPoint)).astype(int))
-                vis_frame = cv2.putText(vis_frame, text, (np.array(pixeli)).astype(int), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (255, 153, 255))
-                vis_frame = cv2.circle(vis_frame,(np.array(pixeli)).astype(int), 2, (255, 153, 255), -1)
+                frameEdited = cv2.putText(frameEdited, text, (np.array(pixeli)).astype(int), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 153, 255))
+                frameEdited = cv2.circle(frameEdited,(np.array(pixeli)).astype(int), 2, (255, 153, 255), -1)
+        '''
         iterationNumber = iterationNumber+1        
             
         
@@ -333,15 +362,18 @@ def runVideoFileDetection(file_path):
 
         if args.show:
             cv2.imshow('Frame', vis_frame)
+            cv2.imshow('Frame Edited', frameEdited)
 
         if save_out_video:
             videoWriter.write(vis_frame)
+            videoWriterEdited.write(frameEdited)
 
         if args.show and cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
     if save_out_video:
         videoWriter.release()
+        videoWriterEdited.release()
     if args.show:
         cv2.destroyAllWindows()
 
